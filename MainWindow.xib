@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14E11f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController">
             <connections>
                 <outlet property="Altitude_Item" destination="PYQ-fL-PWV" id="OTP-mm-vAx"/>
+                <outlet property="DLS_Value" destination="E4M-q8-vBC" id="paq-bc-GxM"/>
                 <outlet property="DayLength_value" destination="hov-Rx-7X0" id="Snx-JA-04V"/>
                 <outlet property="Latitude" destination="doK-Ba-OjE" id="Pfs-r0-LRQ"/>
                 <outlet property="Lontitude" destination="oFB-Ml-JAk" id="HjG-77-ngh"/>
+                <outlet property="SolarAltitude_Value" destination="MuM-Fj-wdz" id="GWk-xV-T4P"/>
+                <outlet property="SolarAzimut_Value" destination="rnO-oO-feh" id="8BX-tm-6Ew"/>
                 <outlet property="SolarDistance_value" destination="uCF-k0-3EP" id="zdg-f6-yrP"/>
+                <outlet property="SolarRadius_Value" destination="rEv-Ey-Vl8" id="EJW-cx-2Hh"/>
                 <outlet property="SouthTime_value" destination="77o-6q-pU4" id="wRp-nO-Mo1"/>
                 <outlet property="SunRise_value" destination="KTn-Vd-PDb" id="K8d-h1-maI"/>
                 <outlet property="SunSet_Value" destination="Y8D-fx-d0n" id="PZu-ZD-e1Q"/>
+                <outlet property="TimeZone_Value" destination="Q4F-Pi-8VE" id="YdI-Lf-uR0"/>
+                <outlet property="TimeZone_Vaue" destination="Q4F-Pi-8VE" id="pXo-dU-QQ4"/>
                 <outlet property="datum" destination="A1a-T8-fLJ" id="pI7-P2-9ER"/>
                 <outlet property="myPosButton" destination="osu-7k-yHW" id="b5O-gi-iXs"/>
                 <outlet property="window" destination="2" id="6"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
-        <window identifier="dsf" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" appearanceType="aqua" animationBehavior="default" id="2" customClass="MainWindow">
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window identifier="dsf" title="ing. M. Behrens Astro tool" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" appearanceType="aqua" animationBehavior="default" id="2" customClass="MainWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="381" y="476" width="557" height="182"/>
+            <rect key="contentRect" x="381" y="476" width="557" height="306"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
             <view key="contentView" id="3">
-                <rect key="frame" x="0.0" y="0.0" width="557" height="182"/>
+                <rect key="frame" x="0.0" y="5" width="557" height="306"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box autoresizesSubviews="NO" title="Times" borderType="line" id="lgE-ZT-lnv">
-                        <rect key="frame" x="17" y="16" width="254" height="159"/>
+                        <rect key="frame" x="17" y="140" width="254" height="159"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView">
                             <rect key="frame" x="1" y="1" width="252" height="143"/>
@@ -133,14 +139,14 @@
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
                     <box autoresizesSubviews="NO" wantsLayer="YES" title="Input" borderType="line" id="Eeo-Sq-XeY">
-                        <rect key="frame" x="286" y="16" width="254" height="159"/>
+                        <rect key="frame" x="286" y="16" width="254" height="283"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView">
-                            <rect key="frame" x="1" y="1" width="252" height="143"/>
+                            <rect key="frame" x="1" y="1" width="252" height="267"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <datePicker verticalHuggingPriority="750" id="A1a-T8-fLJ">
-                                    <rect key="frame" x="18" y="14" width="123" height="27"/>
+                                    <rect key="frame" x="18" y="51" width="219" height="27"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="Hbi-E6-aeR">
                                         <font key="font" metaFont="system"/>
@@ -152,13 +158,13 @@
                                         </date>
                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <datePickerElements key="datePickerElements" year="YES" month="YES" day="YES" timeZone="YES"/>
+                                        <datePickerElements key="datePickerElements" year="YES" month="YES" day="YES" timeZone="YES" hour="YES" minute="YES"/>
                                     </datePickerCell>
                                 </datePicker>
                                 <textField verticalHuggingPriority="750" id="oFB-Ml-JAk">
-                                    <rect key="frame" x="116" y="111" width="118" height="22"/>
+                                    <rect key="frame" x="116" y="235" width="118" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="5,000" drawsBackground="YES" id="TN3-Ls-jVJ">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="5" drawsBackground="YES" usesSingleLineMode="YES" id="TN3-Ls-jVJ">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -168,9 +174,9 @@
                                     </connections>
                                 </textField>
                                 <textField verticalHuggingPriority="750" id="doK-Ba-OjE">
-                                    <rect key="frame" x="116" y="79" width="118" height="22"/>
+                                    <rect key="frame" x="116" y="203" width="118" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="52,000" drawsBackground="YES" id="P6m-SQ-0HW">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="52" drawsBackground="YES" id="P6m-SQ-0HW">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -180,7 +186,7 @@
                                     </connections>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="cFk-I2-6gT">
-                                    <rect key="frame" x="16" y="114" width="72" height="17"/>
+                                    <rect key="frame" x="16" y="238" width="72" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Longtitude" placeholderString="Sunrise" id="xcE-bH-6d4">
                                         <font key="font" metaFont="system"/>
@@ -189,7 +195,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="VEq-G0-ZsC">
-                                    <rect key="frame" x="16" y="81" width="56" height="17"/>
+                                    <rect key="frame" x="16" y="205" width="56" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Latitude" placeholderString="Sunrise" id="6dY-6c-ZuW">
                                         <font key="font" metaFont="system"/>
@@ -197,8 +203,26 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
+                                <textField verticalHuggingPriority="750" id="Q4F-Pi-8VE">
+                                    <rect key="frame" x="116" y="138" width="118" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="1" drawsBackground="YES" id="XFH-cM-dSp">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="eDa-Xq-aWg">
+                                    <rect key="frame" x="16" y="140" width="68" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Time zone" placeholderString="Sunrise" id="TlJ-ii-5Yc">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="guZ-1d-pjO">
-                                    <rect key="frame" x="16" y="50" width="54" height="17"/>
+                                    <rect key="frame" x="16" y="174" width="54" height="17"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Altitude" placeholderString="Sunrise" id="6bo-ig-3sk">
                                         <font key="font" metaFont="system"/>
@@ -207,7 +231,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <popUpButton id="PYQ-fL-PWV">
-                                    <rect key="frame" x="114" y="43" width="122" height="26"/>
+                                    <rect key="frame" x="114" y="167" width="122" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <popUpButtonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="left" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" inset="2" id="v2b-tK-hoJ">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -220,14 +244,97 @@
                                         </menu>
                                     </popUpButtonCell>
                                 </popUpButton>
-                                <button appearanceType="aqua" verticalHuggingPriority="750" id="I1N-S2-CSb">
-                                    <rect key="frame" x="159" y="8" width="80" height="32"/>
+                                <button verticalHuggingPriority="750" id="I1N-S2-CSb">
+                                    <rect key="frame" x="61" y="7" width="130" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="push" title="myPos" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="osu-7k-yHW">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
                                 </button>
+                                <button id="E4M-q8-vBC">
+                                    <rect key="frame" x="114" y="108" width="122" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="isY-0e-opw">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                </button>
+                                <textField toolTip="Use Daylight savings option" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="ior-sK-lQ9">
+                                    <rect key="frame" x="16" y="108" width="30" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DLS" placeholderString="Sunrise" id="rIQ-63-3eg">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                        </view>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </box>
+                    <box autoresizesSubviews="NO" title="Solar position" borderType="line" id="ecV-5z-7nq">
+                        <rect key="frame" x="17" y="16" width="254" height="120"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <view key="contentView">
+                            <rect key="frame" x="1" y="1" width="252" height="104"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="wFF-b3-ddo">
+                                    <rect key="frame" x="16" y="74" width="72" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Azimut" placeholderString="Sunrise" id="rTr-kA-Ssn">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="rnO-oO-feh">
+                                    <rect key="frame" x="105" y="74" width="148" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Azimut_value" id="OFY-X5-auq">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="MuM-Fj-wdz">
+                                    <rect key="frame" x="105" y="49" width="148" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Altitude_value" id="69g-fa-F8P">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="uE0-Hx-ZIa">
+                                    <rect key="frame" x="16" y="49" width="72" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Altitude" placeholderString="Sunset" id="s4p-ct-kKy">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="rEv-Ey-Vl8">
+                                    <rect key="frame" x="105" y="24" width="148" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SolarRadius_value" id="SlE-fg-Smf">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="fsC-5a-CZr">
+                                    <rect key="frame" x="16" y="24" width="72" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Radius" placeholderString="Sunset" id="eKR-01-phQ">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
                             </subviews>
                         </view>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
@@ -235,6 +342,7 @@
                     </box>
                 </subviews>
             </view>
+            <point key="canvasLocation" x="344.5" y="406"/>
         </window>
         <menuItem title="Altitude" id="YWY-gB-X4y"/>
     </objects>

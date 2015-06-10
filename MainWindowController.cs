@@ -73,7 +73,15 @@ namespace AstronomicalTimes
 
 			double lat = Double.Parse(Latitude.ObjectValue.ToString());
 			double lon = Double.Parse(Lontitude.ObjectValue.ToString());
-			astro tijd = new astro(lat,lon,dateTime.Day, dateTime.Month, dateTime.Year, altitude);
+
+
+			int TimeZone = Int16.Parse (TimeZone_Value.ObjectValue.ToString ());
+			bool dls = false;
+			if (DLS_Value.ObjectValue.ToString ().CompareTo ("1") == 0)
+				dls = true;
+
+
+			astro tijd = new astro(lat,lon, dateTime.Hour, dateTime.Minute, dateTime.Day, dateTime.Month, dateTime.Year, altitude,TimeZone,dls);
 			astro.Sun sun = tijd.getSun ();
 
 			SunRise_value.StringValue = tijd.sunRiseStr;
@@ -81,6 +89,10 @@ namespace AstronomicalTimes
 			DayLength_value.StringValue = "" + sun.Diff * 2.0;
 			SouthTime_value.StringValue =  "" + (int)tijd.SouthTime + ":" + (int)(60.0 * (tijd.SouthTime - ((int)tijd.SouthTime)));
 			SolarDistance_value.StringValue = "" + ((int)(sun.Distance * 149597870.700)) + " km" ;
+
+			SolarAzimut_Value.StringValue = tijd.getSun().Azimut.ToString();
+			SolarAltitude_Value.StringValue = tijd.getSun ().SolarAngle.ToString();
+			SolarRadius_Value.StringValue = "" + ((int)(tijd.getSun ().Radius * 1391684)) + " km" ; 
 
 
 
@@ -112,11 +124,16 @@ namespace AstronomicalTimes
 			Latitude.Activated += (object sender, EventArgs e) => {	update_astroTimes(); };
 			Lontitude.Activated += (object sender, EventArgs e) => { update_astroTimes(); };
 			Altitude_Item.Activated += (object sender, EventArgs e) => { update_astroTimes (); };
+			DLS_Value.Activated += (object sender, EventArgs e) => { update_astroTimes (); };
+			TimeZone_Value.Activated += (object sender, EventArgs e) => { update_astroTimes (); };
+
 
 			//myPos = new myLocation ();
 			//myPos.RunTheMethod (updateLocations);
 
-			datum.DateValue = DateTime.Today ;
+			//datum.DateValue = DateTime.Today ;
+			datum.DateValue = DateTime.Now;
+
 
 			myPosButton.Activated += (object sender, EventArgs e) => {
 				myPos = new myLocation ();

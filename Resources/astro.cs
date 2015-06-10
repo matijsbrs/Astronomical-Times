@@ -5,30 +5,28 @@ namespace AstronomicalTimes
 	static class Constants {
 		public const double RADEG = 57.29577951308233; //!< Constant used to convert radians to degrees
 		public const double DEGRAD = 0.01745329251994;  //!< Constant used to convert degrees to radians
-
-
 	}
 
 
 
 	public class astro
 	{
-		public double Longtitude;      //!< longtitude postive is East, negative is West
-		public double Latitude;        //!< latitude positive is North, negative is South
-		public double timeZone = +1.0; // Amsterdam
-		int year,month,day;     //!< dates
-		double days;           	//!< Days since 2000 Jan 0.0 (negative before)
-		double sunTime;         //!< Local sidereal time
+		public double Longtitude;      	//!< longtitude postive is East, negative is West
+		public double Latitude;       	//!< latitude positive is North, negative is South
+		public double timeZone = +1.0; 	// Amsterdam
+		int year,month,day,hour,minute; //!< date and time
+		double days;           			//!< Days since 2000 Jan 0.0 (negative before)
+		double sunTime;         		//!< Local sidereal time
 		public string sunSetStr;
 		public string sunRiseStr;
 		public Double SouthTime;
-		public bool DayLightSavings = false;
+		public bool DayLightSavings;
 
 		Sun zon;
 
 		public class Sun {
 			public double Latitude;
-			public double Longtitude;
+			public double Longitude;
 			public double Duration; //!< Solar duration
 			public double Distance; 
 			public double Radius;
@@ -40,6 +38,10 @@ namespace AstronomicalTimes
 			public double solarLongtitude;
 			public double solarLatitude;
 
+			public double Azimut;
+			public double SolarAngle;
+			public int year,month,day,hour,minute;
+
 			public Sun() {
 				solarLatitude 	= 0.0;
 				Altitude 		= -0.55; // normal
@@ -49,6 +51,34 @@ namespace AstronomicalTimes
 			public Sun(double altitude) {
 				Altitude = altitude;
 			}
+
+			public double Position() {
+
+
+				double days = (month-1)*(30.4375f) + day + (hour) / 23.75f + (minute/1425.0f);
+				double Declination = -23.45 * Math.Cos((Constants.DEGRAD * 360.0f * (days + 10.0f)) / 365.0f);
+				double EOT = 60.0f * (-0.171f * Math.Sin((0.0337f*days+0.465f)) - 0.1299f * Math.Sin((0.01787f*days-0.168f)));
+				double LHA = 15.0f * (hour + (minute/60.0f) - (15.0f-Longitude)/15.0f - 12.0f + EOT/60.0f);
+
+				double x = Math.Sin((Constants.DEGRAD * Latitude)) * Math.Sin((Constants.DEGRAD * Declination)) + Math.Cos((Constants.DEGRAD * Latitude)) * Math.Cos((Constants.DEGRAD * Declination)) * Math.Cos((Constants.DEGRAD * LHA));
+				double y = - (Math.Sin((Constants.DEGRAD * Latitude)) * x - Math.Sin((Constants.DEGRAD * Declination))) / (Math.Cos((Constants.DEGRAD * Latitude)) * Math.Sin(Math.Acos(x)));
+				SolarAngle = Math.Asin(x) / Constants.DEGRAD;
+				//double reverseX = sin(SolarAngle * K);
+				//printf("\tSolarAngle: %f orignal(x):%f x:%f\n",SolarAngle,x, reverseX );
+
+				double stop = 12.0 + (15.0-Longitude)/15.0 - EOT/60.0;
+
+				 
+				if ( (hour + (minute/60.0)) <= stop) {
+					Azimut = Math.Acos(y) / Constants.DEGRAD;
+				} else {
+					Azimut = 360.0 - Math.Acos(y) / Constants.DEGRAD;
+				}
+
+				//Console.WriteLine("Azimut: %f of %f of %f decl:%f EOT:%f x:%f\n",Azimut, (Math.Acos(y) / Constants.DEGRAD), (360.0 - Math.Acos(y) / Constants.DEGRAD), Declination, EOT,x);
+				return SolarAngle;
+			}
+
 
 			public double Position(double day) {
 				double M,  //!< Mean anomaly of the Sun
@@ -74,6 +104,8 @@ namespace AstronomicalTimes
 					solarLongtitude -= 360.0;                   /* Make it 0..360 degrees */
 
 				Radius       = 0.2666 / Distance;     // Compute the Sun's apparent radius in degrees
+
+				//Console.WriteLine ("days{0}, x{1}, y{2} ,angle:{3}", day, x, y, (Math.Asin(x) / Constants.DEGRAD));
 
 				return solarLongtitude;
 			}
@@ -118,7 +150,7 @@ namespace AstronomicalTimes
 				a = Math.Sin ((Altitude-Radius) * Constants.DEGRAD);
 				b = Math.Sin ((Latitude) * Constants.DEGRAD);
 				c = Math.Sin (Declination * Constants.DEGRAD);
-				d = Math.Cos(Latitude*Constants.DEGRAD);
+				d = Math.Cos (Latitude*Constants.DEGRAD);
 				e = Math.Cos (Declination * Constants.DEGRAD);
 				//Console.WriteLine("a:{0}, b:{1}, c{2}, d{3}, e{4}", a,b,c,d,e );
 				Duration = (a - b * c) / (d * e);
@@ -161,12 +193,30 @@ namespace AstronomicalTimes
 		}
 
 
+		public astro ( double lat, double lon, int hourIn, int minuteIn, int dayIn, int monthIn, int yearIn, double altitudeIn, int timeZoneIn, bool useDayLightSavingsIn) {
+			Latitude = lat;
+			Longtitude = lon;
+			day = dayIn;
+			month = monthIn;
+			year = yearIn;
+			hour = hourIn; // 12 hour default time.
+			minute = minuteIn;
+			timeZone = timeZoneIn;
+			zon = new Sun (altitudeIn);
+			DayLightSavings = useDayLightSavingsIn;
+			superCalc ();
+		}
+
 		public astro ( double lat, double lon, int dayIn, int monthIn, int yearIn, double altitudeIn ) {
 			Latitude = lat;
 			Longtitude = lon;
 			day = dayIn;
 			month = monthIn;
 			year = yearIn;
+			hour = 12; // 12 hour default time.
+ 			minute = 0;
+			timeZone = 1; // default is home ;-)
+			DayLightSavings = true;
 			zon = new Sun (altitudeIn);
 			superCalc ();
 		}
@@ -177,6 +227,8 @@ namespace AstronomicalTimes
 
 			Latitude 	= 52.0;	
 			Longtitude 	= 5.0;
+			minute 		= 0;
+			hour 		= 12;
 			day 		= 1;
 			month	 	= 1;
 			year 		= 2014;
@@ -229,31 +281,44 @@ namespace AstronomicalTimes
 		}
 
 		void superCalc() {
-			days     = dayCount(year, month, day)+ 0.5 - Longtitude/360.0;
+			days     = dayCount(year, month, day)+(12/24) - Longtitude/360.0;
 			//sunTime  = revolution( GMST0(input->result.days) + 180.0f + input->me.longtitude );       // Time in respect to sun
-			zon.Longtitude 	= Longtitude;
+			zon.Longitude 	= Longtitude;
 			zon.Latitude	= Latitude;
-			zon.days = days;
+			zon.days 		= days;
+			zon.year 		= year;
+			zon.month 		= month;
+			zon.day 		= day;
+			if ((isSummer (year, month, day) == true) && DayLightSavings) {
+				zon.hour = hour + (int)timeZone;
+			} else {
+				zon.hour = hour + (int)timeZone+1;
+			}
+			zon.minute 		= minute;
+			zon.Position (); // calculate the actual position of the sun at the exact given time.
 
 			sunTime = zon.revolution (zon.GMST0(days) + 180.0 + Longtitude);
 			//Console.WriteLine ("sunTime: " + sunTime + " long: " + Longtitude + " days " + days);
+
 			zon.Position (days);
 			//Console.WriteLine ("sun: longtitude:{0}, distance{1}", zon.solarLongtitude, zon.Distance);
 
 			zon.SunEquatorialDeclination ();
+
+
 			//Console.WriteLine ("sun: equatorial:{0}, declanation{1}", zon.Equatorial, zon.Declination);
 			//SunPosition             (input->result.days, &input->sun.longtitude, &input->sun.distance);
 			//SunEquatorialDeclination(input->result.days, input->sun.longtitude, input->sun.distance, &input->sun.equatorial, &input->sun.declination);
 
 			//input->sun.southTime    = 12.0f - (revolution_180(input->sun.time - input->sun.equatorial)/15.0f);         // Calc when the sun is South (Universal Time)
-			SouthTime = 12.0 - (zon.revolution_180 (sunTime - zon.Equatorial ) / 15.0);
+			SouthTime = 12.0 - (zon.revolution_180 (sunTime - zon.Equatorial ) / 15.0); // Calculate the sun south (universal) 
 			//Console.WriteLine ("sun: southtime:{0}", SouthTime);
 			//input->sun.radius       = 0.2666f / input->sun.distance;                                                 // Compute the Sun's apparent radius in degrees
 
 			//input->sun.diffTime     = sunDiff((input->me.altitude - input->sun.radius), input->me.latitude, input->sun.declination, &input->sun.solarDuration);
 			zon.Difference ();
 			SouthTime  += timeZone; // compensate for timezone
-			if (isSummer (year, month, day) == true)
+			if ((isSummer (year, month, day) == true) && DayLightSavings)
 				SouthTime += 1; // summertime
 
 			double SunRise = SouthTime - zon.Diff;

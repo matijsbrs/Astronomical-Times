@@ -22,6 +22,9 @@ namespace AstronomicalTimes
 		MonoMac.AppKit.NSTextField DayLength_value { get; set; }
 
 		[Outlet]
+		MonoMac.AppKit.NSButton DLS_Value { get; set; }
+
+		[Outlet]
 		MonoMac.AppKit.NSTextField Latitude { get; set; }
 
 		[Outlet]
@@ -31,7 +34,16 @@ namespace AstronomicalTimes
 		MonoMac.AppKit.NSButtonCell myPosButton { get; set; }
 
 		[Outlet]
+		MonoMac.AppKit.NSTextField SolarAltitude_Value { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSTextField SolarAzimut_Value { get; set; }
+
+		[Outlet]
 		MonoMac.AppKit.NSTextField SolarDistance_value { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSTextField SolarRadius_Value { get; set; }
 
 		[Outlet]
 		MonoMac.AppKit.NSTextField SouthTime_value { get; set; }
@@ -41,6 +53,9 @@ namespace AstronomicalTimes
 
 		[Outlet]
 		MonoMac.AppKit.NSTextField SunSet_Value { get; set; }
+
+		[Outlet]
+		MonoMac.AppKit.NSTextField TimeZone_Value { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -69,6 +84,11 @@ namespace AstronomicalTimes
 				Lontitude = null;
 			}
 
+			if (myPosButton != null) {
+				myPosButton.Dispose ();
+				myPosButton = null;
+			}
+
 			if (SolarDistance_value != null) {
 				SolarDistance_value.Dispose ();
 				SolarDistance_value = null;
@@ -89,9 +109,29 @@ namespace AstronomicalTimes
 				SunSet_Value = null;
 			}
 
-			if (myPosButton != null) {
-				myPosButton.Dispose ();
-				myPosButton = null;
+			if (TimeZone_Value != null) {
+				TimeZone_Value.Dispose ();
+				TimeZone_Value = null;
+			}
+
+			if (SolarRadius_Value != null) {
+				SolarRadius_Value.Dispose ();
+				SolarRadius_Value = null;
+			}
+
+			if (SolarAltitude_Value != null) {
+				SolarAltitude_Value.Dispose ();
+				SolarAltitude_Value = null;
+			}
+
+			if (SolarAzimut_Value != null) {
+				SolarAzimut_Value.Dispose ();
+				SolarAzimut_Value = null;
+			}
+
+			if (DLS_Value != null) {
+				DLS_Value.Dispose ();
+				DLS_Value = null;
 			}
 		}
 	}
