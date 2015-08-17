@@ -82,7 +82,6 @@
     <Compile Include="AppDelegate.designer.cs">
       <DependentUpon>AppDelegate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Resources\astro.cs" />
     <Compile Include="Resources\myLocation.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -132,5 +131,11 @@
     <BundleResource Include="Resources\Astronomical-Times\Images.xcassets\AppIcon.appiconset\256x256-1-1-1.png" />
     <BundleResource Include="Resources\3022b89253832041.icns" />
     <BundleResource Include="Resources\0012c68545832041.icns" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Behrens\Behrens.csproj">
+      <Project>{0BE94903-CC97-4D9E-9FBB-490E5C1CED98}</Project>
+      <Name>Behrens</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

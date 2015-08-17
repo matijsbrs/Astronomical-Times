@@ -17,8 +17,8 @@ namespace AstronomicalTimes
 
 	public myLocation ()
 	{
-				Console.WriteLine ("hoppa " + meCounter);
-				meCounter++;
+				
+			meCounter++;
 			pos = new CLLocationManager ();
 			pos.DesiredAccuracy = 1000;
 
